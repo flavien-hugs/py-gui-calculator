@@ -43,15 +43,15 @@ class Calculator:
 
     def bind_keyboard_calculate(self):
         self.window.bind("<Return>", lambda event: self.evaluate())
-        [self.window.bind(
-            str(key), lambda event, digit=key: self.append_current_expression(digit)
-            ) for key in self.digits
-        ]
 
-        [self.window.bind(
-            str(key), lambda event, operator=key: self.append_operator(operator)
-        ) for key in self.operators]
-
+        for key in self.digits:
+            self.window.bind(
+                str(key), lambda event, digit=key: self.append_current_expression(digit)
+            )
+        for key in self.operators:
+            self.window.bind(
+                str(key), lambda event, operator=key: self.append_operator(operator)
+            )
 
     def create_special_button(self):
         self.create_clear_button()
@@ -138,7 +138,7 @@ class Calculator:
             self.buttons_frame, text="x\u00b2",
             bg=Color.COLOR_OFF_WITH, fg=Color.COLOR_LABEL,
             font=FontStyle.DEFAULT_FONT_STYLE, borderwidth=0,
-            command=lambda: self.square())
+            command=self.square)
         square_button.grid(row=0, column=2, sticky=tk.NSEW)
 
     def sqrt(self):
@@ -151,8 +151,9 @@ class Calculator:
             self.buttons_frame, text="\u221ax",
             bg=Color.COLOR_OFF_WITH, fg=Color.COLOR_LABEL,
             font=FontStyle.DEFAULT_FONT_STYLE, borderwidth=0,
-            command=lambda: self.sqrt())
+            command=self.sqrt)
         sqrt_button.grid(row=0, column=3, sticky=tk.NSEW)
+
 
     def evaluate(self):
         self.total_expression += self.current_expression
@@ -185,7 +186,7 @@ class Calculator:
         self.total_label.config(text=expresssion)
 
     def update_current_label(self):
-        self.current_label.config(text=self.current_expression[:11])
+        self.current_label.config(text=self.current_expression)
 
     def run(self):
         self.window.mainloop()

@@ -15,6 +15,10 @@ install: venv ## Install or update dependencies with pipenv
 freeze: ## Pin current dependencies with pipenv
 	pipenv run pip freeze > requirements.in
 
+.PHONY: setup
+setup: ## Setup calculator
+	$(PYTHON) setup.py
+
 .PHONY: build
-build: ## Run the script
-	pyinstaller --onefile -w setup.py
+build: ## build to exe
+	pyinstaller --onefile core/main.py
