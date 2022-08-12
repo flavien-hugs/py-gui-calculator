@@ -169,7 +169,7 @@ class Calculator:
         self.total_label.config(text=expresssion)
 
     def update_current_label(self):
-        self.current_label.config(text=self.current_expression)
+        self.current_label.config(text=self.current_expression[::11])
 
     def run(self):
         self.window.mainloop()
