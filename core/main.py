@@ -163,7 +163,10 @@ class Calculator:
         return frame
 
     def update_total_label(self):
-        self.total_label.config(text=self.total_expression)
+        expresssion = self.total_expression
+        for operator, symbol in self.operators.items():
+            expresssion = expresssion.replace(operator, f"{symbol}")
+        self.total_label.config(text=expresssion)
 
     def update_current_label(self):
         self.current_label.config(text=self.current_expression)
