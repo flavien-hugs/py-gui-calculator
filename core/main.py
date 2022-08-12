@@ -43,6 +43,8 @@ class Calculator:
     def create_special_button(self):
         self.create_clear_button()
         self.create_equals_button()
+        self.create_square_button()
+        self.create_sqrt_button()
 
     def create_display_labels(self):
         total_label = tk.Label(
@@ -111,7 +113,33 @@ class Calculator:
             bg=Color.COLOR_OFF_WITH, fg=Color.COLOR_LABEL,
             font=FontStyle.DEFAULT_FONT_STYLE, borderwidth=0,
             command=self.clear_window)
-        clear_button.grid(row=0, column=1, columnspan=3, sticky=tk.NSEW)
+        clear_button.grid(row=0, column=1, sticky=tk.NSEW)
+
+    def square(self):
+        if self.current_expression:
+            self.current_expression = eval(f"{self.current_expression}**2")
+            self.update_current_label()
+
+    def create_square_button(self):
+        square_button = tk.Button(
+            self.buttons_frame, text="x\u00b2",
+            bg=Color.COLOR_OFF_WITH, fg=Color.COLOR_LABEL,
+            font=FontStyle.DEFAULT_FONT_STYLE, borderwidth=0,
+            command=lambda: self.square())
+        square_button.grid(row=0, column=2, sticky=tk.NSEW)
+
+    def sqrt(self):
+        if self.current_expression:
+            self.current_expression = eval(f"{self.current_expression}**0.5")
+            self.update_current_label()
+
+    def create_sqrt_button(self):
+        sqrt_button = tk.Button(
+            self.buttons_frame, text="\u221ax",
+            bg=Color.COLOR_OFF_WITH, fg=Color.COLOR_LABEL,
+            font=FontStyle.DEFAULT_FONT_STYLE, borderwidth=0,
+            command=lambda: self.sqrt())
+        sqrt_button.grid(row=0, column=3, sticky=tk.NSEW)
 
     def evaluate(self):
         self.total_expression += self.current_expression
