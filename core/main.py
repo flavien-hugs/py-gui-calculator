@@ -144,10 +144,13 @@ class Calculator:
     def evaluate(self):
         self.total_expression += self.current_expression
         self.update_total_label()
-
-        self.current_expression = str(eval(self.total_expression))
-        self.total_expression = ""
-        self.update_current_label()
+        try:
+            self.current_expression = str(eval(self.total_expression))
+            self.total_expression = ""
+        except Exception as e:
+            self.current_expression = f"error {e}".casefold()
+        finally:
+            self.update_current_label()
 
     def create_equals_button(self):
         equal_button = tk.Button(
