@@ -13,9 +13,9 @@ class Calculator:
 
         self.total_expression = "0"
         self.current_expression = "0"
-
         self.display_frame = self.create_display_frame()
-        self.total_label = self.create_display_labels()
+
+        self.total_label, self.current_label = self.create_display_labels()
         self.buttons_frame = self.create_buttons_frame()
 
     def create_display_labels(self):
